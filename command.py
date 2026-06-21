@@ -11,11 +11,11 @@ def parse_command():
   if chr(ch) in 'HJKLYUBN': run(chr(ch))
   elif ch == ord(' '):
     regenerate_hp()
-    move_local_enemies()
+    move_all_enemies()
   elif ch == ord('w'):
     for i in range(50):
       regenerate_hp()
-      move_local_enemies()
+      move_all_enemies()
   elif ch == ord('>') and game['dungeon'][game['player']['y']][game['player']['x']] == STAIRS:
     game['level'] += 1
     make_level()

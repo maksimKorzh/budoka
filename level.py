@@ -26,9 +26,15 @@ def fill_dungeon():
 
   # Place enemies
   tiles = get_tiles([FLOOR])
-  for i in range(roll_dice(5, int(game['level']/2)+3)):
+  for i in range(roll_dice(2, int(game['level']/2)+3)):
     pos = choice(tiles)
     if pos == player_pos: continue
+    occupied = False
+    for enemy in game['enemies']:
+      if enemy['position']['y'] == pos[0] and \
+         enemy['position']['x'] == pos[1]:
+        occupied = True
+    if occupied: break
     hp = game['level']*2
     attack = game['level']
     defense = game['level']
