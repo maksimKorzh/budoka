@@ -55,20 +55,22 @@ EMEMIES = {
 }
 
 RANKS = {
-  '1': '5 kyu',
-  '2': '4 kyu',
-  '3': '3 kyu',
-  '4': '2 kyu',
-  '5': '1 kyu',
-  '6': '1 dan',
-  '7': '2 dan',
-  '8': '3 dan',
-  '9': '4 dan',
-  '10': '5 dan',
-  '11': '6 dan',
-  '12': '7 dan',
-  '13': '8 dan',
-  '14': '9 dan',
+  '1': { 'degree': '7 kyu', 'belt': 'white' },
+  '2': { 'degree': '6 kyu', 'belt': 'yellow' },
+  '3': { 'degree': '5 kyu', 'belt': 'magenta' },
+  '4': { 'degree': '4 kyu', 'belt': 'cyan' },
+  '5': { 'degree': '3 kyu', 'belt': 'blue' },
+  '6': { 'degree': '2 kyu', 'belt': 'green' },
+  '7': { 'degree': '1 kyu', 'belt': 'red' },
+  '8': { 'degree': '1 dan', 'belt': 'black' },
+  '9': { 'degree': '2 dan', 'belt': 'black' },
+  '10': { 'degree': '3 dan', 'belt': 'black' },
+  '11': { 'degree': '4 dan', 'belt': 'black' },
+  '12': { 'degree': '5 dan', 'belt': 'black' },
+  '13': { 'degree': '6 dan', 'belt': 'black' },
+  '14': { 'degree': '7 dan', 'belt': 'black' },
+  '15': { 'degree': '8 dan', 'belt': 'black' },
+  '16': { 'degree': '9 dan', 'belt': 'black' },
 }
 
 MAX_LEVEL = len(RANKS)

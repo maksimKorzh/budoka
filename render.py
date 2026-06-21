@@ -33,7 +33,7 @@ def render_enemies():
         if game['dungeon'][enemy_y][enemy_x] == FLOOR:
           if current_room(player_y, player_x, room):
             if current_room(enemy_y, enemy_x, room):
-              screen.addch(enemy_y, enemy_x, enemy['style'], paint('white'))
+              screen.addch(enemy_y, enemy_x, enemy['style'], paint(  RANKS[ str(enemy['level']) ]['belt']  ))
         elif game['dungeon'][enemy_y][enemy_x] in [PASSAGE, DOOR]:
           if abs(enemy_y-player_y) <= 1 and abs(enemy_x-player_x) <= 1:
             screen.addch(enemy_y, enemy_x, enemy['style'], paint('white'))
