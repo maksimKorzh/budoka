@@ -49,7 +49,6 @@ def render_player():
   belt = RANKS[str(game['player']['level'])]['belt']
   screen.addch(player_y, player_x, PLAYER, paint(belt))
   screen.move(player_y, player_x)
-  curses.curs_set(1)
 
 # Render single room
 def render_room(room):
@@ -71,10 +70,6 @@ def render_abandoned_room(room):
 
 # Render game level
 def render_dungeon():
-  # Avoid glitches
-  curses.curs_set(0)
-  screen.move(0, 0)
-  
   # Current player position
   player_y = game['player']['y']
   player_x = game['player']['x']
