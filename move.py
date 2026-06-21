@@ -3,10 +3,6 @@ from globals import *
 
 # Move player
 def move(ch):
-  # clear previous message
-  screen.move(0, 0)
-  screen.clrtoeol()
-
   # Current player position
   player_y = game['player']['y']
   player_x = game['player']['x']
@@ -102,7 +98,8 @@ def blocked(row, col):
   # Blocked by enemy
   for enemy in game['enemies']:
     if enemy['position']['y'] == row and enemy['position']['x'] == col:
-      return True
+      if enemy['hp']: return True
+      else: return False
   
   # Blocked by dungeon
   if game['dungeon'][row][col] in [FLOOR, DOOR, PASSAGE]: return False
@@ -139,7 +136,7 @@ def move_towards(py, px, ey, ex, enemy):
     moves.append((step_y, step_x))
     step_x = 1 if dx > 0 else -1 if dx < 0 else 0
     moves.append((0, step_x))
-  
+
   # Try moves in order
   for my, mx in moves:
     if my == 0 and mx == 0: continue
@@ -156,6 +153,7 @@ def move_all_enemies():
     player_x = game['player']['x']
     if distance_to(player_y, player_x, enemy['position']['y'], enemy['position']['x']) >= 2:
       move_towards(player_y, player_x, enemy['position']['y'], enemy['position']['x'], enemy)
+    else: enemy_hit(enemy)
 
 # Local monsters chase player
 def move_local_enemies():
@@ -168,3 +166,4 @@ def move_local_enemies():
     if [enemy_y, enemy_x] in game['visited_tiles']:
       if distance_to(player_y, player_x, enemy['position']['y'], enemy['position']['x']) >= 2:
         move_towards(player_y, player_x, enemy['position']['y'], enemy['position']['x'], enemy)
+      else: enemy_hit(enemy)

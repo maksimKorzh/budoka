@@ -90,6 +90,16 @@ def render_dungeon():
     if not current_room(player_y, player_x, room):
       render_abandoned_room(room)
 
+# Render player stats
+def render_stats():
+  level = game['level']
+  hp = game['player']['hp']
+  attack = game['player']['attack']
+  defense = game['player']['defense']
+  style = game['player']['style']
+  rank = RANKS[str(game['player']['level'])]['degree']
+  screen.addstr(23, 1, f'Level: {level}  HP: {hp}  Attack: {attack}  Defense: {defense}        {style} {rank} practitioner')
+
 # Render screen
 def render_screen():
   render_dungeon()
@@ -98,4 +108,5 @@ def render_screen():
     render_dungeon()
     render_all_enemies()
   else: render_enemies()
+  render_stats()
   render_player()

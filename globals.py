@@ -88,6 +88,8 @@ game = {
     'attack': 1,
     'defense': 1,
     'level': 1,
+    'style': 'Aikido',
+    'experience': 0,
     'sensitivity': False,
     'aggravate': False
   },
@@ -111,9 +113,10 @@ def read_key():
 
 # Print message
 def message(text):
-  screen.addstr(0, 0, text)
+  screen.addstr(0, 1, text + ' --PRESS ANY KEY--')
   screen.clrtoeol()
-  render_player()
+  render_screen()
+  read_key()
 
 # Packages
 from colors import *

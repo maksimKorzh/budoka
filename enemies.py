@@ -35,5 +35,30 @@ def player_hit(enemy):
     if not enemy['hp']:
       enemy['style'] = game['dungeon'][enemy['position']['y']][enemy['position']['x']]
       message(f'You defeated {name}')
+      game['player']['experience'] += enemy['attack'] * enemy['level']
+      if game['player']['experience'] >= game['player']['level'] * 10:
+        game['player']['level'] += 1
+        game['player']['attack'] += 1
+        game['player']['defense'] += 1
+        game['player']['hp'] = game['player']['level'] * 2
+        new_rank = RANKS[str(game['player']['level'])]['degree']
+        message(f'Congratulations! You were awarded {new_rank}')
     else: message(f'You hit {name}({hp}) by {damage} points')
   else: message(f'You missed {name}({hp})')
+
+# Enemy hits player
+def enemy_hit(enemy):
+  style = ENEMIES[enemy['style']]
+  rank = RANKS[str(enemy['level'])]['degree']
+  hp = enemy['hp']
+  name = rank + ' ' + style + ' practitioner'
+  enemy_chance = enemy['attack'] * enemy['level']
+  player_chance = game['player']['defense'] * game['player']['level']
+  hit_chance = enemy_chance + roll_dice(1, 6) >= player_chance + roll_dice(1, 6)
+  if hit_chance:
+    damage = enemy['attack'] * enemy['level'] + roll_dice(1, 6) - game['player']['defense']
+    game['player']['hp'] -= damage
+    #game['player']['hp'] = max(0, game['player']['hp'])
+    
+    message(f'{name}({hp}) hits you by {damage} points')
+  else: message(f'{name} missed you')
