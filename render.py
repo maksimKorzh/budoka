@@ -22,15 +22,16 @@ def render_enemies():
     if enemy['hp'] == 0: continue
     enemy_y = enemy['position']['y']
     enemy_x = enemy['position']['x']
+    belt = RANKS[str(enemy['level'])]['belt']
     if [enemy_y, enemy_x] in game['visited_tiles']:
       for room in game['rooms']:
         if game['dungeon'][enemy_y][enemy_x] == FLOOR:
           if current_room(player_y, player_x, room):
             if current_room(enemy_y, enemy_x, room):
-              screen.addch(enemy_y, enemy_x, enemy['name'], paint(RANKS[str(enemy['level'])]['belt']))
+              screen.addch(enemy_y, enemy_x, enemy['name'], paint(belt))
         elif game['dungeon'][enemy_y][enemy_x] in [PASSAGE, DOOR]:
           if abs(enemy_y-player_y) <= 1 and abs(enemy_x-player_x) <= 1:
-            screen.addch(enemy_y, enemy_x, enemy['name'], paint(RANKS[str(enemy['level'])]['belt']))
+            screen.addch(enemy_y, enemy_x, enemy['name'], paint(belt))
 
 # Render enemies
 def render_all_enemies():
@@ -38,13 +39,15 @@ def render_all_enemies():
     if enemy['hp'] == 0: continue
     enemy_y = enemy['position']['y']
     enemy_x = enemy['position']['x']
-    screen.addch(enemy_y, enemy_x, enemy['name'], paint(RANKS[str(enemy['level'])]['belt']))
+    belt = RANKS[str(enemy['level'])]['belt']
+    screen.addch(enemy_y, enemy_x, enemy['name'], paint(belt))
 
 # Render player
 def render_player():
   player_y = game['player']['y']
   player_x = game['player']['x']
-  screen.addch(player_y, player_x, PLAYER)
+  belt = RANKS[str(game['player']['level'])]['belt']
+  screen.addch(player_y, player_x, PLAYER, paint('white'))
   screen.move(player_y, player_x)
   curses.curs_set(1)
 
