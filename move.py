@@ -105,7 +105,7 @@ def blocked(row, col):
       return True
   
   # Blocked by dungeon
-  if game['dungeon'][row][col] == FLOOR: return False
+  if game['dungeon'][row][col] in [FLOOR, DOOR, PASSAGE]: return False
   else: return True
 
 # Get distance between two cells

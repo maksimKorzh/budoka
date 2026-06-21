@@ -33,7 +33,7 @@ def player_hit(enemy):
     enemy['hp'] -= damage
     enemy['hp'] = max(0, enemy['hp'])
     if not enemy['hp']:
-      enemy['style'] = FLOOR
+      enemy['style'] = game['dungeon'][enemy['position']['y']][enemy['position']['x']]
       message(f'You defeated {name}')
     else: message(f'You hit {name}({hp}) by {damage} points')
   else: message(f'You missed {name}({hp})')
