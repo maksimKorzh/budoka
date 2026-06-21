@@ -12,6 +12,10 @@ def parse_command():
   elif ch == ord(' '):
     regenerate_hp()
     move_local_enemies()
+  elif ch == ord('w'):
+    for i in range(50):
+      regenerate_hp()
+      move_local_enemies()
   elif ch == ord('>') and game['dungeon'][game['player']['y']][game['player']['x']] == STAIRS:
     game['level'] += 1
     make_level()
