@@ -7,38 +7,38 @@ def move(ch):
   player_y = game['player']['y']
   player_x = game['player']['x']
   
-  # Orthogonal motion control
+  # Obstacles
+  obstacles = [V_WALL, H_WALL, EMPTY]
+
+  # Motion control
   if ch == ord('h'):
-    if game['dungeon'][player_y][player_x-1] not in [V_WALL, H_WALL, EMPTY]:
+    if game['dungeon'][player_y][player_x-1] not in obstacles:
       player_x -= 1
   elif ch == ord('j'):
-    if game['dungeon'][player_y+1][player_x] not in [V_WALL, H_WALL, EMPTY]:
+    if game['dungeon'][player_y+1][player_x] not in obstacles:
       player_y += 1
   elif ch == ord('k'):
-    if game['dungeon'][player_y-1][player_x] not in [V_WALL, H_WALL, EMPTY]:
+    if game['dungeon'][player_y-1][player_x] not in obstacles:
       player_y -= 1
   elif ch == ord('l'):
-    if game['dungeon'][player_y][player_x+1] not in [V_WALL, H_WALL, EMPTY]:
+    if game['dungeon'][player_y][player_x+1] not in obstacles:
       player_x += 1
-
-  # Diagonal motion control
-  if game['dungeon'][player_y][player_x] != DOOR:
-    if ch == ord('y'):
-      if game['dungeon'][player_y-1][player_x-1] not in [V_WALL, H_WALL, DOOR, EMPTY]:
-        player_x -= 1
-        player_y -= 1
-    elif ch == ord('b'):
-      if game['dungeon'][player_y+1][player_x-1] not in [V_WALL, H_WALL, DOOR, EMPTY]:
-        player_x -=1
-        player_y += 1
-    if ch == ord('u'):
-      if game['dungeon'][player_y-1][player_x+1] not in [V_WALL, H_WALL, DOOR, EMPTY]:
-        player_x += 1
-        player_y -= 1
-    if ch == ord('n'):
-      if game['dungeon'][player_y+1][player_x+1] not in [V_WALL, H_WALL, DOOR, EMPTY]:
-        player_x += 1
-        player_y += 1
+  elif ch == ord('y'):
+    if game['dungeon'][player_y-1][player_x-1] not in obstacles:
+      player_x -= 1
+      player_y -= 1
+  elif ch == ord('b'):
+    if game['dungeon'][player_y+1][player_x-1] not in obstacles:
+      player_x -=1
+      player_y += 1
+  if ch == ord('u'):
+    if game['dungeon'][player_y-1][player_x+1] not in obstacles:
+      player_x += 1
+      player_y -= 1
+  if ch == ord('n'):
+    if game['dungeon'][player_y+1][player_x+1] not in obstacles:
+      player_x += 1
+      player_y += 1
   
   # Update player position
   game['player']['y'] = player_y
