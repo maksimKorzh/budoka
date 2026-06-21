@@ -27,7 +27,8 @@ def player_hit(enemy):
   style = ENEMIES[enemy['name']]
   rank = RANKS[str(enemy['level'])]['degree']
   hp = enemy['hp']
-  name = rank + ' ' + style + ' practitioner'
+  status = 'Deshi' if enemy['level'] < 8 else 'Sensei'
+  name = rank + ' ' + style + ' ' + status
   for i in range(bonuses['multiple_attacks']):
     message(f'You attempt attack {i+1}')
     player_chance = game['player']['attack'] * game['player']['level']
@@ -39,7 +40,7 @@ def player_hit(enemy):
     if hit_chance:
       damage = roll_dice(1, game['player']['attack'] * game['player']['level']) + roll_dice(1, 6) - enemy['defense']
       if bonuses['max_damage']:
-        damage = game['player']['attack'] * game['player']['level'] + roll_dice(1, 6) - enemy['defense']
+        damage = game['player']['attack'] * game['player']['level'] - enemy['defense']
         message('You attack with maximum damage')
       enemy['hp'] -= damage
       enemy['hp'] = max(0, enemy['hp'])
@@ -67,7 +68,8 @@ def enemy_hit(enemy):
   style = ENEMIES[enemy['name']]
   rank = RANKS[str(enemy['level'])]['degree']
   hp = enemy['hp']
-  name = rank + ' ' + style + ' practitioner'
+  status = 'Deshi' if enemy['level'] < 8 else 'Sensei'
+  name = rank + ' ' + style + ' ' + status
   for i in range(bonuses['multiple_attacks']):
     message(f'{name} attempts attack {i+1}')
     enemy_chance = enemy['attack'] * enemy['level']
@@ -79,7 +81,7 @@ def enemy_hit(enemy):
     if hit_chance:
       damage = roll_dice(1, enemy['attack'] * enemy['level'] + roll_dice(1, 6)) + roll_dice(1, 6) - game['player']['defense']
       if bonuses['max_damage']:
-        damage = enemy['attack'] * enemy['level'] + roll_dice(1, 6) + roll_dice(1, 6) - game['player']['defense']
+        damage = enemy['attack'] * enemy['level'] + roll_dice(1, 6) - game['player']['defense']
         message(f'{name} attacks with maximum damage')
       game['player']['hp'] -= damage
       game['player']['hp'] = max(0, game['player']['hp'])
