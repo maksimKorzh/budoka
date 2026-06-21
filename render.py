@@ -105,7 +105,8 @@ def render_stats():
   status = 'Deshi' if game['player']['level'] < 8 else 'Sensei'
   exp = game['player']['experience']
   up = game['player']['level'] ** 2 * 10
-  screen.addstr(23, 1, f'Level: {level}  HP: {hp}({max_hp})  XP: {exp}/{up}  Attack: {attack}  Defense: {defense} -> {rank} {style} {status}')
+  chased = 'chased' if game['player']['chased'] else 'calm'
+  screen.addstr(23, 1, f'Level: {level}  HP: {hp}({max_hp})  XP: {exp}/{up}  Attack: {attack}  Defense: {defense} -> {rank} {style} {status} is {chased}')
   screen.clrtoeol()
 
 # Clear screen

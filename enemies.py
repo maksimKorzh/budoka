@@ -23,7 +23,7 @@ def create_enemy(row, col, hp, attack, defense, level, name):
 # Player hits enemy
 def player_hit(enemy):
   bonuses = BONUSES[game['player']['style']]
-  game['player']['aggravate'] = True
+  game['player']['chased'] = True
   style = ENEMIES[enemy['name']]
   rank = RANKS[str(enemy['level'])]['degree']
   hp = enemy['hp']
@@ -64,7 +64,7 @@ def player_hit(enemy):
 # Enemy hits player
 def enemy_hit(enemy):
   bonuses = BONUSES[ENEMIES[enemy['name']]]
-  game['player']['aggravate'] = False
+  game['player']['chased'] = False
   style = ENEMIES[enemy['name']]
   rank = RANKS[str(enemy['level'])]['degree']
   hp = enemy['hp']

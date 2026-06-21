@@ -138,7 +138,7 @@ game = {
     'style': 'Aikido',
     'experience': 0,
     'sensitivity': False,
-    'aggravate': False
+    'chased': False
   },
   'enemies': []
 }

@@ -74,7 +74,7 @@ def move(ch):
     explore([player_y+off[1], player_x+off[0]])
   
   # Update enemy position
-  if game['player']['aggravate'] == True: move_all_enemies()
+  if game['player']['chased'] == True: move_all_enemies()
   else: move_local_enemies()
   
 # Run player
