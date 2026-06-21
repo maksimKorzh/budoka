@@ -42,7 +42,8 @@ def player_hit(enemy):
       if bonuses['max_damage']:
         damage = game['player']['attack'] * game['player']['level'] + roll_dice(1, 6)- enemy['defense']
         message('You attack with maximum damage')
-      enemy['hp'] -= max(1, damage)
+      damage = max(1, damage)
+      enemy['hp'] -= damage
       enemy['hp'] = max(0, enemy['hp'])
       if not enemy['hp']:
         enemy['name'] = game['dungeon'][enemy['position']['y']][enemy['position']['x']]
@@ -83,12 +84,13 @@ def enemy_hit(enemy):
       if bonuses['max_damage']:
         damage = enemy['attack'] * enemy['level'] + roll_dice(1, 6) - game['player']['defense']
         message(f'{name} attacks with maximum damage')
-      game['player']['hp'] -= max(1, damage)
+      damage = max(1, damage)
+      game['player']['hp'] -= damage
       game['player']['hp'] = max(0, game['player']['hp'])
       if not game['player']['hp']:
         message(f'You were defeated by {name}')
         curses.endwin()
-        print(f'You need to train harder!')
+        print(f'You need to study {game['player']['style'].lower()} harder!')
         sys.exit()
         break
       message(f'{name}({hp}) hits you by {damage} points')

@@ -60,14 +60,14 @@ BONUSES = {
   'Judo': {
     'hp': 0,
     'attack': 0,
-    'defense': 1,
+    'defense': 2,
     'max_damage': True,
     'always_hit': False,
     'multiple_attacks': 1
   },
   'Karate': {
     'hp': 0,
-    'attack': 1,
+    'attack': 2,
     'defense': 0,
     'max_damage': True,
     'always_hit': False,
@@ -75,14 +75,14 @@ BONUSES = {
   },
   'Ninjutsu': {
     'hp': 0,
-    'attack': 0,
+    'attack': 1,
     'defense': 1,
-    'max_damage': False,
+    'max_damage': True,
     'always_hit': True,
     'multiple_attacks': 1
   },
   'Sumo': {
-    'hp': 5,
+    'hp': 10,
     'attack': 1,
     'defense': 1,
     'max_damage': False,
@@ -94,7 +94,7 @@ BONUSES = {
     'attack': 1,
     'defense': 0,
     'max_damage': False,
-    'always_hit': False,
+    'always_hit': True,
     'multiple_attacks': 2
   }
 }
@@ -158,12 +158,12 @@ def message(text):
 
 # Character selection menu
 menu = 'Pick up your style:\n\n'
-menu += ' a) Aikido   (Tripple attack, always hit)\n'
-menu += ' j) Judo     (Defense +1, maximum damage)\n'
-menu += ' k) Karate   (Attack +1, max damage)\n'
-menu += ' n) Ninjutsu (Defense +1, always hit)\n'
-menu += ' s) Sumo     (Attack +1, Defense+1, HP +5)\n'
-menu += ' t) Taido    (Double attack, Attack +1)\n\n'
+menu += ' a) Aikido   (tripple attack, always hit)\n'
+menu += ' j) Judo     (defense +2, max damage)\n'
+menu += ' k) Karate   (attack +2, max damage)\n'
+menu += ' n) Ninjutsu (attack +1, defense +1, always hit, max damage)\n'
+menu += ' s) Sumo     (attack +1, defense+1, HP +10)\n'
+menu += ' t) Taido    (double attack, always hit, attack +1)\n\n'
 menu += 'Your choice > '
 
 # Pick up your style
