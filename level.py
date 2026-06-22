@@ -6,6 +6,26 @@ def explore(tile):
   if tile not in game['visited_tiles']:
     game['visited_tiles'].append(tile)
 
+# Place enemies
+def place_enemies(player_pos, times, max_enemies):
+  tiles = get_tiles([FLOOR])
+  for i in range(roll_dice(times, max_enemies)):
+    pos = choice(tiles)
+    if pos == player_pos: continue
+    occupied = False
+    for enemy in game['enemies']:
+      if enemy['position']['y'] == pos[0] and \
+         enemy['position']['x'] == pos[1]:
+        occupied = True
+    if occupied: break
+    hp = game['level']*2
+    attack = game['level']
+    defense = game['level']
+    level = randrange(game['level'], game['level']+2)
+    style = choice(list(ENEMIES.keys()))
+    enemy = create_enemy(pos[0], pos[1], hp, attack, defense, level, style)
+    game['enemies'].append(enemy)
+
 # Add enemies and items
 def fill_dungeon():
   # Place stairs
@@ -29,23 +49,7 @@ def fill_dungeon():
   game['player']['x'] = player_pos[1]
 
   # Place enemies
-  tiles = get_tiles([FLOOR])
-  for i in range(roll_dice(2, game['level'])):
-    pos = choice(tiles)
-    if pos == player_pos: continue
-    occupied = False
-    for enemy in game['enemies']:
-      if enemy['position']['y'] == pos[0] and \
-         enemy['position']['x'] == pos[1]:
-        occupied = True
-    if occupied: break
-    hp = game['level']*2
-    attack = game['level']
-    defense = game['level']
-    level = randrange(game['level'], game['level']+2)
-    style = choice(list(ENEMIES.keys()))
-    enemy = create_enemy(pos[0], pos[1], hp, attack, defense, level, style)
-    game['enemies'].append(enemy)
+  place_enemies(player_pos, 2, game['level'])
 
 # Create a single dungeon level
 def make_level():

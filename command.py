@@ -48,7 +48,7 @@ def parse_command():
           curses.endwin()
           if len(game['player']['belts']) == 7:
             print(f'You have been accepted by the martial art community as an acknowledged {game["player"]["style"]} sensei. You may now start your own dojo')
-          else: print(f'You have escaped with {", ".join(game["player"]["belts"])} belt(s) and earned {game["player"]["experience"]} experience')
+          else: print(f'You have escaped with {", ".join(game["player"]["belts"])} belt(s) and earned {game["player"]["experience"]} experience points')
           sys.exit()
         else: make_level()
       else: message(f'You need to have {required_belt} belt to ascend')

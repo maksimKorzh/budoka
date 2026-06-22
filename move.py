@@ -7,6 +7,11 @@ def regenerate_hp():
   if not game['steps'] % (30-game['level']):
     if game['player']['hp'] < game['player']['max_hp']:
       game['player']['hp'] += 1
+  if not game['steps'] % 200:
+    if coin_toss():
+      player_pos = [game['player']['y'], game['player']['x']]
+      place_enemies(player_pos, 2, game['level'])
+      message('New challengers enter the dungeon')
 
 # Move player
 def move(ch):
