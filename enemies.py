@@ -20,6 +20,19 @@ def create_enemy(row, col, hp, attack, defense, level, name):
     'name': name
   }
 
+# Promote to the next rank
+def promote():
+  new_belt = RANKS[str(game['player']['level']+1)]['belt']
+  if new_belt not in game['player']['belts']:
+    message(f'You deserve to wear {new_belt} but you need to find it first')
+    return
+  game['player']['level'] += 1
+  game['player']['attack'] += 1
+  game['player']['defense'] += 1
+  game['player']['max_hp'] += game['player']['level']
+  if game['player']['level'] >= 8: game['player']['sensivity'] = True
+  message(f'Congratulations! You are now wearing a {new_belt} belt!')
+
 # Player hits enemy
 def player_hit(enemy):
   bonuses = BONUSES[game['player']['style']]
@@ -50,14 +63,7 @@ def player_hit(enemy):
         message(f'You defeated {name}')
         game['player']['experience'] += enemy['attack'] * enemy['level']
         bonuses = BONUSES[game['player']['style']]
-        if game['player']['experience'] >= game['player']['level'] ** 2 * 10:
-          game['player']['level'] += 1
-          game['player']['attack'] += 1
-          game['player']['defense'] += 1
-          game['player']['max_hp'] += game['player']['level']
-          new_rank = RANKS[str(game['player']['level'])]['degree']
-          if game['player']['level'] >= 8: game['player']['sensivity'] = True
-          message(f'Congratulations! You were awarded {new_rank}')
+        if game['player']['experience'] >= game['player']['level'] ** 2 * 10: promote()
         break
       else: message(f'You hit {name}({enemy["hp"]}) by {damage} points')
     else: message(f'You missed {name}({enemy["hp"]})')
@@ -90,7 +96,7 @@ def enemy_hit(enemy):
       if not game['player']['hp']:
         message(f'You were defeated by {name}')
         curses.endwin()
-        print(f'You need to study {game['player']['style'].lower()} harder!')
+        print(f'You need to study {game["player"]["style"].lower()} harder!')
         sys.exit()
         break
       message(f'{name}({enemy["hp"]}) hits you by {damage} points')

@@ -31,6 +31,7 @@ SECTORS_COL3_OFFSET_MAX = 23
 SECTORS_COL3_OFFSET_MIN = 16
 
 DOOR = '+'
+BELT = '='
 EMPTY = ' '
 FLOOR = '.'
 V_WALL = '|'
@@ -38,6 +39,12 @@ H_WALL = '-'
 STAIRS = '%'
 PLAYER = '@'
 PASSAGE = '#'
+RED_BELT = '6'
+CYAN_BELT = '3'
+BLUE_BELT = '4'
+BLACK_BELT = '7'
+GREEN_BELT = '5'
+MAGENTA_BELT = '2'
 
 ENEMIES = {
  'A': 'Aikido',
@@ -106,15 +113,7 @@ RANKS = {
   '4': { 'degree': '3 kyu', 'belt': 'blue' },
   '5': { 'degree': '2 kyu', 'belt': 'green' },
   '6': { 'degree': '1 kyu', 'belt': 'red' },
-  '7': { 'degree': '1 dan', 'belt': 'black' },
-  '8': { 'degree': '2 dan', 'belt': 'black' },
-  '9': { 'degree': '3 dan', 'belt': 'black' },
-  '10': { 'degree': '4 dan', 'belt': 'black' },
-  '11': { 'degree': '5 dan', 'belt': 'black' },
-  '12': { 'degree': '6 dan', 'belt': 'black' },
-  '13': { 'degree': '7 dan', 'belt': 'black' },
-  '14': { 'degree': '8 dan', 'belt': 'black' },
-  '15': { 'degree': '9 dan', 'belt': 'black' },
+  '7': { 'degree': '1 dan', 'belt': 'black' }
 }
 
 MAX_LEVEL = len(RANKS)
@@ -136,10 +135,10 @@ game = {
     'level': 1,
     'style': 'Aikido',
     'experience': 0,
+    'belts': ['yellow'],
     'sensivity': False,
     'chased': False
-  },
-  'enemies': []
+  },'enemies': []
 }
 
 # Read key from keyboard

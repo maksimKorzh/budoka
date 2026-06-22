@@ -93,15 +93,27 @@ def run(ch):
   elif ch == 'U': y = -1; x = 1
   elif ch == 'B': y = 1; x = -1
   elif ch == 'N': y = 1; x = 1
-
+  
+  # Passable objects
+  passable = [
+    FLOOR, PASSAGE, DOOR, STAIRS,
+    MAGENTA_BELT, CYAN_BELT, BLUE_BELT, GREEN_BELT, RED_BELT, BLACK_BELT
+  ]
+  
+  # Stoppable objects
+  stoppable = [
+    DOOR, STAIRS,
+    MAGENTA_BELT, CYAN_BELT, BLUE_BELT, GREEN_BELT, RED_BELT, BLACK_BELT
+  ]
+  
   # Move along direction
   player_y = game['player']['y']
   player_x = game['player']['x']
-  while game['dungeon'][player_y+y][player_x+x] in [FLOOR, PASSAGE, DOOR, STAIRS]:
+  while game['dungeon'][player_y+y][player_x+x] in passable:
     move(ord(ch.lower()))
     player_y = game['player']['y']
     player_x = game['player']['x']
-    if game['dungeon'][player_y][player_x] in [DOOR, STAIRS]: break
+    if game['dungeon'][player_y][player_x] in stoppable: break
     if encounter(player_y+y, player_x+x): break
 
 # Whether a given cell is blocked

@@ -12,6 +12,8 @@ def render_char(row, col, dark_room=False):
     screen.addch(row, col, game['dungeon'][row][col], paint('yellow'))
   elif game['dungeon'][row][col] == PASSAGE:
     screen.addch(row, col, game['dungeon'][row][col], paint('darkwhite'))
+  elif game['dungeon'][row][col] in [str(i) for i in range(2, 8)]:
+    screen.addch(row, col, BELT, paint(RANKS[game['dungeon'][row][col]]['belt']))
   else: screen.addch(row, col, game['dungeon'][row][col], paint('white'))
 
 # Render enemies

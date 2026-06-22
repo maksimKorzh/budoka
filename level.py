@@ -11,12 +11,15 @@ def fill_dungeon():
   # Place stairs
   if game['level'] < 6:
     tiles = get_tiles([FLOOR])
-    stairs_pos = choice(tiles)
+    stairs = choice(tiles)
   else:
     tiles = get_tiles([FLOOR, PASSAGE])
-    stairs_pos = choice(tiles)
+    stairs = choice(tiles)
+  game['dungeon'][stairs[0]][stairs[1]] = STAIRS
   
-  game['dungeon'][stairs_pos[0]][stairs_pos[1]] = STAIRS
+  # Place belt
+  belt = choice(get_tiles([FLOOR]))
+  game['dungeon'][belt[0]][belt[1]] = str(game['level']+1)
 
   # Place player
   tiles = get_tiles([FLOOR])
