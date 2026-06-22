@@ -16,9 +16,14 @@ def parse_command():
     for i in range(50):
       regenerate_hp()
       move_all_enemies()
-  elif ch == ord('>') and game['dungeon'][game['player']['y']][game['player']['x']] == STAIRS:
-    game['level'] += 1
-    make_level()
+  elif ch == ord('>'):
+    if game['dungeon'][game['player']['y']][game['player']['x']] == STAIRS:
+      game['level'] += 1
+      make_level()
+  elif ch == ord('<'):
+    if game['dungeon'][game['player']['y']][game['player']['x']] == STAIRS:
+      game['level'] -= 1
+      make_level()
   elif ch == ord('q'):
     curses.endwin()
     sys.exit()

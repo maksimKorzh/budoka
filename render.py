@@ -2,8 +2,8 @@
 from globals import *
 
 # Render single character in dungeon
-def render_char(row, col):
-  if [row, col] not in game['visited_tiles']: return
+def render_char(row, col, dark_room=False):
+  if [row, col] not in game['visited_tiles'] and not dark_room: return
   if game['dungeon'][row][col] == FLOOR:
     screen.addch(row, col, game['dungeon'][row][col], paint('white'))
   elif game['dungeon'][row][col] == DOOR:
@@ -54,8 +54,18 @@ def render_player():
 def render_room(room):
   tiles = room['floors'] + room['v_walls'] + room['h_walls']
   for tile in tiles:
-    explore(tile)
-    render_char(tile[0], tile[1])
+    if room['light']:
+      explore(tile)
+      render_char(tile[0], tile[1])
+    else:
+      if game['dungeon'][tile[0]][tile[1]] == FLOOR:
+        screen.addch(tile[0], tile[1], ' ')
+      for tile in tiles:
+        if tile[0] == game['player']['y'] and tile[1] == game['player']['x']:
+          for dir in [
+            (1, 0), (-1, 0), (0, 1), (0, -1),
+            (1, 1), (-1,-1), (1,-1), (-1, 1)
+          ]: render_char(tile[0]+dir[0], tile[1]+dir[1], True)
 
 # A room without a player
 def render_abandoned_room(room):
@@ -64,7 +74,8 @@ def render_abandoned_room(room):
   for tile in floors:
     if game['dungeon'][tile[0]][tile[1]] == FLOOR:
       if tile in game['visited_tiles']:
-        screen.addch(tile[0], tile[1], FLOOR, paint('darkwhite'))
+        if room['light']: screen.addch(tile[0], tile[1], FLOOR, paint('darkwhite'))
+        else: screen.addch(tile[0], tile[1], ' ')
     else: render_char(tile[0], tile[1])
   for tile in walls: render_char(tile[0], tile[1])
 
@@ -100,8 +111,7 @@ def render_stats():
   status = 'deshi' if game['player']['level'] < 8 else 'sensei'
   exp = game['player']['experience']
   up = game['player']['level'] ** 2 * 10
-  chased = 'chased' if game['player']['chased'] else 'calm'
-  screen.addstr(23, 1, f'Level: {level}  HP: {hp}({max_hp})  XP: {exp}/{up}  Attack: {attack}  Defense: {defense} -> {rank} {style} {status} is {chased}')
+  screen.addstr(23, 1, f'Level: {level}  HP: {hp}({max_hp})  XP: {exp}/{up}  Attack: {attack}  Defense: {defense} -> {rank} {style} {status}')
   screen.clrtoeol()
 
 # Clear screen
@@ -113,7 +123,7 @@ def clear_screen():
 # Render screen
 def render_screen():
   render_dungeon()
-  if game['player']['sensitivity']:
+  if game['player']['sensivity']:
     clear_screen()
     render_dungeon()
     render_all_enemies()

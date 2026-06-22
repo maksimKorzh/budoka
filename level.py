@@ -26,7 +26,7 @@ def fill_dungeon():
 
   # Place enemies
   tiles = get_tiles([FLOOR])
-  for i in range(roll_dice(2, int(game['level']/2)+3)):
+  for i in range(roll_dice(2, game['level'])):
     pos = choice(tiles)
     if pos == player_pos: continue
     occupied = False
@@ -72,18 +72,26 @@ def make_level():
     while rand_sector in sectors:
       rand_sector = randrange(9)
     sectors.append(rand_sector)
-  
+
+  # Random dark rooms
+  light_rooms = [True for i in range(9)]
+  if game['level'] > 2:
+    num_dark = roll_dice(1, 6)
+    for i in range(num_dark):
+      light_rooms[i] = False
+  shuffle(light_rooms)
+
   # Create rooms
   for sector in sectors:
-    if sector == 0: place_room(SECTORS_COL1_OFFSET_MAX, SECTORS_COL1_OFFSET_MIN, SECTORS_ROW1_OFFSET_MAX, SECTORS_ROW1_OFFSET_MIN, sector, True)
-    elif sector == 1: place_room(SECTORS_COL1_OFFSET_MAX, SECTORS_COL1_OFFSET_MIN, SECTORS_ROW2_OFFSET_MAX, SECTORS_ROW2_OFFSET_MIN, sector, True)
-    elif sector == 2: place_room(SECTORS_COL1_OFFSET_MAX, SECTORS_COL1_OFFSET_MIN, SECTORS_ROW3_OFFSET_MAX, SECTORS_ROW3_OFFSET_MIN, sector, True)
-    elif sector == 3: place_room(SECTORS_COL2_OFFSET_MAX, SECTORS_COL2_OFFSET_MIN, SECTORS_ROW1_OFFSET_MAX, SECTORS_ROW1_OFFSET_MIN, sector, True)
-    elif sector == 4: place_room(SECTORS_COL2_OFFSET_MAX, SECTORS_COL2_OFFSET_MIN, SECTORS_ROW2_OFFSET_MAX, SECTORS_ROW2_OFFSET_MIN, sector, True)
-    elif sector == 5: place_room(SECTORS_COL2_OFFSET_MAX, SECTORS_COL2_OFFSET_MIN, SECTORS_ROW3_OFFSET_MAX, SECTORS_ROW3_OFFSET_MIN, sector, True)
-    elif sector == 6: place_room(SECTORS_COL3_OFFSET_MAX, SECTORS_COL3_OFFSET_MIN, SECTORS_ROW1_OFFSET_MAX, SECTORS_ROW1_OFFSET_MIN, sector, True)
-    elif sector == 7: place_room(SECTORS_COL3_OFFSET_MAX, SECTORS_COL3_OFFSET_MIN, SECTORS_ROW2_OFFSET_MAX, SECTORS_ROW2_OFFSET_MIN, sector, True)
-    elif sector == 8: place_room(SECTORS_COL3_OFFSET_MAX, SECTORS_COL3_OFFSET_MIN, SECTORS_ROW3_OFFSET_MAX, SECTORS_ROW3_OFFSET_MIN,  sector, True)
+    if sector == 0: place_room(SECTORS_COL1_OFFSET_MAX, SECTORS_COL1_OFFSET_MIN, SECTORS_ROW1_OFFSET_MAX, SECTORS_ROW1_OFFSET_MIN, sector, light_rooms[0])
+    elif sector == 1: place_room(SECTORS_COL1_OFFSET_MAX, SECTORS_COL1_OFFSET_MIN, SECTORS_ROW2_OFFSET_MAX, SECTORS_ROW2_OFFSET_MIN, sector, light_rooms[1])
+    elif sector == 2: place_room(SECTORS_COL1_OFFSET_MAX, SECTORS_COL1_OFFSET_MIN, SECTORS_ROW3_OFFSET_MAX, SECTORS_ROW3_OFFSET_MIN, sector, light_rooms[2])
+    elif sector == 3: place_room(SECTORS_COL2_OFFSET_MAX, SECTORS_COL2_OFFSET_MIN, SECTORS_ROW1_OFFSET_MAX, SECTORS_ROW1_OFFSET_MIN, sector, light_rooms[3])
+    elif sector == 4: place_room(SECTORS_COL2_OFFSET_MAX, SECTORS_COL2_OFFSET_MIN, SECTORS_ROW2_OFFSET_MAX, SECTORS_ROW2_OFFSET_MIN, sector, light_rooms[4])
+    elif sector == 5: place_room(SECTORS_COL2_OFFSET_MAX, SECTORS_COL2_OFFSET_MIN, SECTORS_ROW3_OFFSET_MAX, SECTORS_ROW3_OFFSET_MIN, sector, light_rooms[5])
+    elif sector == 6: place_room(SECTORS_COL3_OFFSET_MAX, SECTORS_COL3_OFFSET_MIN, SECTORS_ROW1_OFFSET_MAX, SECTORS_ROW1_OFFSET_MIN, sector, light_rooms[6])
+    elif sector == 7: place_room(SECTORS_COL3_OFFSET_MAX, SECTORS_COL3_OFFSET_MIN, SECTORS_ROW2_OFFSET_MAX, SECTORS_ROW2_OFFSET_MIN, sector, light_rooms[7])
+    elif sector == 8: place_room(SECTORS_COL3_OFFSET_MAX, SECTORS_COL3_OFFSET_MIN, SECTORS_ROW3_OFFSET_MAX, SECTORS_ROW3_OFFSET_MIN,  sector, light_rooms[8])
   
   # Connect rooms
   connect_rooms()

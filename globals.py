@@ -2,7 +2,7 @@
 import sys
 import math
 import curses
-from random import randrange, choice
+from random import randrange, choice, shuffle
 
 # Constants
 ROWS = 24
@@ -58,11 +58,11 @@ BONUSES = {
     'multiple_attacks': 3
   },
   'Judo': {
-    'hp': 0,
+    'hp': 5,
     'attack': 0,
     'defense': 2,
     'max_damage': True,
-    'always_hit': False,
+    'always_hit': True,
     'multiple_attacks': 1
   },
   'Karate': {
@@ -100,22 +100,21 @@ BONUSES = {
 }
 
 RANKS = {
-  '1': { 'degree': '7 kyu', 'belt': 'white' },
-  '2': { 'degree': '6 kyu', 'belt': 'yellow' },
-  '3': { 'degree': '5 kyu', 'belt': 'magenta' },
-  '4': { 'degree': '4 kyu', 'belt': 'cyan' },
-  '5': { 'degree': '3 kyu', 'belt': 'blue' },
-  '6': { 'degree': '2 kyu', 'belt': 'green' },
-  '7': { 'degree': '1 kyu', 'belt': 'red' },
-  '8': { 'degree': '1 dan', 'belt': 'black' },
-  '9': { 'degree': '2 dan', 'belt': 'black' },
-  '10': { 'degree': '3 dan', 'belt': 'black' },
-  '11': { 'degree': '4 dan', 'belt': 'black' },
-  '12': { 'degree': '5 dan', 'belt': 'black' },
-  '13': { 'degree': '6 dan', 'belt': 'black' },
-  '14': { 'degree': '7 dan', 'belt': 'black' },
-  '15': { 'degree': '8 dan', 'belt': 'black' },
-  '16': { 'degree': '9 dan', 'belt': 'black' },
+  '1': { 'degree': '6 kyu', 'belt': 'yellow' },
+  '2': { 'degree': '5 kyu', 'belt': 'magenta' },
+  '3': { 'degree': '4 kyu', 'belt': 'cyan' },
+  '4': { 'degree': '3 kyu', 'belt': 'blue' },
+  '5': { 'degree': '2 kyu', 'belt': 'green' },
+  '6': { 'degree': '1 kyu', 'belt': 'red' },
+  '7': { 'degree': '1 dan', 'belt': 'black' },
+  '8': { 'degree': '2 dan', 'belt': 'black' },
+  '9': { 'degree': '3 dan', 'belt': 'black' },
+  '10': { 'degree': '4 dan', 'belt': 'black' },
+  '11': { 'degree': '5 dan', 'belt': 'black' },
+  '12': { 'degree': '6 dan', 'belt': 'black' },
+  '13': { 'degree': '7 dan', 'belt': 'black' },
+  '14': { 'degree': '8 dan', 'belt': 'black' },
+  '15': { 'degree': '9 dan', 'belt': 'black' },
 }
 
 MAX_LEVEL = len(RANKS)
@@ -137,7 +136,7 @@ game = {
     'level': 1,
     'style': 'Aikido',
     'experience': 0,
-    'sensitivity': False,
+    'sensivity': False,
     'chased': False
   },
   'enemies': []
@@ -159,7 +158,7 @@ def message(text):
 # Character selection menu
 menu = 'Pick up your style:\n\n'
 menu += ' a) Aikido   (tripple attack, always hit)\n'
-menu += ' j) Judo     (defense +2, max damage)\n'
+menu += ' j) Judo     (defense +2, always_hit, max damage)\n'
 menu += ' k) Karate   (attack +2, max damage)\n'
 menu += ' n) Ninjutsu (attack +1, defense +1, always hit, max damage)\n'
 menu += ' s) Sumo     (attack +1, defense+1, HP +10)\n'
@@ -170,7 +169,8 @@ menu += 'Your choice > '
 try:
   game['player']['style'] = ENEMIES[input(menu).upper()]
   bonuses = BONUSES[game['player']['style']]
-  game['player']['hp'] += bonuses['hp']
+  game['player']['max_hp'] += bonuses['hp']
+  game['player']['hp'] = game['player']['max_hp']
   game['player']['attack'] += bonuses['attack']
   game['player']['defense'] += bonuses['defense']
 except: pass

@@ -159,7 +159,7 @@ def place_room(y_max, y_min, x_max, x_min, sector, light):
   ]
   
   # Create room  
-  make_room(rand_row, rand_col, rand_height, rand_width, room_doors[sector], sector, True)
+  make_room(rand_row, rand_col, rand_height, rand_width, room_doors[sector], sector, light)
 
 # Connect rooms with passages
 def connect_rooms():

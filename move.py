@@ -70,6 +70,7 @@ def move(ch):
   for off in [
     (0, 0),
     (1, 0), (-1, 0), (0, 1), (0, -1),
+    (1, 1), (-1,-1), (1,-1), (-1, 1)
   ]:
     explore([player_y+off[1], player_x+off[0]])
   
