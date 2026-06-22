@@ -24,14 +24,14 @@ def create_enemy(row, col, hp, attack, defense, level, name):
 def promote():
   new_belt = RANKS[str(game['player']['level']+1)]['belt']
   if new_belt not in game['player']['belts']:
-    message(f'You deserve to wear {new_belt} but you need to find it first')
+    message(f'You deserve to wear {new_belt} belt but you need to find it first')
     return
   game['player']['level'] += 1
   game['player']['attack'] += 1
   game['player']['defense'] += 1
   game['player']['max_hp'] += game['player']['level']
   if game['player']['level'] >= 8: game['player']['sensivity'] = True
-  message(f'Congratulations! You are now wearing a {new_belt} belt!')
+  message(f'You are now wearing {new_belt} belt')
 
 # Player hits enemy
 def player_hit(enemy):
@@ -96,7 +96,7 @@ def enemy_hit(enemy):
       if not game['player']['hp']:
         message(f'You were defeated by {name}')
         curses.endwin()
-        print(f'You need to study {game["player"]["style"].lower()} harder!')
+        print(f'You need to study {game["player"]["style"].lower()} harder')
         sys.exit()
         break
       message(f'{name}({enemy["hp"]}) hits you by {damage} points')

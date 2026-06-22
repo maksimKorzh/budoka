@@ -19,7 +19,8 @@ def fill_dungeon():
   
   # Place belt
   belt = choice(get_tiles([FLOOR]))
-  game['dungeon'][belt[0]][belt[1]] = str(game['level']+1)
+  if game['level'] < 7:
+    game['dungeon'][belt[0]][belt[1]] = str(game['level']+1)
 
   # Place player
   tiles = get_tiles([FLOOR])

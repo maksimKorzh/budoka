@@ -20,17 +20,23 @@ def parse_command():
     item = game['dungeon'][game['player']['y']][game['player']['x']]
     if item in list(RANKS.keys()):
       belt = RANKS[item]['belt']
+      if belt in game['player']['belts']:
+        message(f'You already have a {belt} belt')
+        return
       game['player']['belts'].append(belt)
     game['dungeon'][game['player']['y']][game['player']['x']] = FLOOR
     message(f'You picked up {belt} belt')
     if game['player']['experience'] < game['player']['level'] ** 2 * 10:
-      message(f'You don\'t deserve to wear a {belt} belt yet.')
+      message(f'You don\'t deserve to wear {belt} belt yet')
     else: promote()
   elif ch == ord('i'):
     belts = game['player']['belts']
     message(f'Belts you have: {", ".join(belts)}')
   elif ch == ord('>'):
     if game['dungeon'][game['player']['y']][game['player']['x']] == STAIRS:
+      if game['level'] == max([int(i) for i in list(RANKS.keys())]):
+        message('You have reached the deepest level')
+        return
       game['level'] += 1
       make_level()
   elif ch == ord('<'):
@@ -40,7 +46,9 @@ def parse_command():
         game['level'] -= 1
         if game['level'] == 0:
           curses.endwin()
-          print('You escaped')
+          if len(game['player']['belts']) == 7:
+            print(f'You have been accepted by the martial art community as an acknowledged {game["player"]["style"]} sensei. You may now start your own dojo')
+          else: print(f'You have escaped with {", ".join(game["player"]["belts"])} belt(s) and earned {game["player"]["experience"]} experience')
           sys.exit()
         else: make_level()
       else: message(f'You need to have {required_belt} belt to ascend')
