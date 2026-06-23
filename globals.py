@@ -128,8 +128,8 @@ game = {
   'player': {
     'y': 0,
     'x': 0,
-    'hp': 10,
-    'max_hp': 10,
+    'hp': 20,
+    'max_hp': 20,
     'attack': 1,
     'defense': 1,
     'level': 1,
