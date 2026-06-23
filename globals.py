@@ -89,16 +89,16 @@ BONUSES = {
     'multiple_attacks': 1
   },
   'Sumo': {
-    'hp': 10,
-    'attack': 1,
-    'defense': 1,
+    'hp': 15,
+    'attack': 2,
+    'defense': 2,
     'max_damage': False,
     'always_hit': False,
     'multiple_attacks': 1
   },
   'Taido': {
     'hp': 0,
-    'attack': 1,
+    'attack': 2,
     'defense': 0,
     'max_damage': False,
     'always_hit': True,
@@ -157,10 +157,10 @@ def message(text):
 # Character selection menu
 menu = 'Pick up your style:\n\n'
 menu += ' a) Aikido   (tripple attack, always hit)\n'
-menu += ' j) Judo     (defense +2, always_hit, max damage)\n'
+menu += ' j) Judo     (defense +2, always_hit, max damage, HP +5)\n'
 menu += ' k) Karate   (attack +2, max damage)\n'
 menu += ' n) Ninjutsu (attack +1, defense +1, always hit, max damage)\n'
-menu += ' s) Sumo     (attack +1, defense+1, HP +10)\n'
+menu += ' s) Sumo     (attack +2, defense+2, HP +15)\n'
 menu += ' t) Taido    (double attack, always hit, attack +1)\n\n'
 menu += 'Your choice > '
 
@@ -182,6 +182,7 @@ curses.raw()
 screen.keypad(1)
 curses.start_color()
 curses.use_default_colors()
+curses.curs_set(0)
 
 # Packages
 from colors import *

@@ -49,7 +49,8 @@ def render_player():
   player_y = game['player']['y']
   player_x = game['player']['x']
   belt = RANKS[str(game['player']['level'])]['belt']
-  screen.addch(player_y, player_x, PLAYER, paint(belt))
+  reverse = curses.A_REVERSE if belt != 'black' else 0
+  screen.addch(player_y, player_x, PLAYER, paint(belt) | reverse)
   screen.move(player_y, player_x)
 
 # Render single room
