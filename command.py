@@ -15,7 +15,7 @@ def parse_command():
   elif ch == ord('w'):
     for i in range(50):
       regenerate_hp()
-      move_all_enemies()
+      move_local_enemies()
   elif ch == ord(','):
     item = game['dungeon'][game['player']['y']][game['player']['x']]
     if item in list(RANKS.keys()):
