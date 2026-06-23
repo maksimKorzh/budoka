@@ -26,7 +26,7 @@ There are 6 martial art classes:
  - Ninjutsu
  - Sumo
  - Taido
-<br>
+
 In order to promote to the next rank you need to gain
 experience by defeating enemies and also pick up a
 corresponding belt.
