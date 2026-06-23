@@ -26,8 +26,8 @@ def parse_command():
       game['player']['belts'].append(belt)
       game['dungeon'][game['player']['y']][game['player']['x']] = FLOOR
       message(f'You picked up {belt} belt')
-    if game['player']['experience'] < game['player']['level'] ** 2 * 10:
-      message(f'You don\'t deserve to wear {belt} belt yet')
+      if game['player']['experience'] < game['player']['level'] ** 2 * 10:
+        message(f'You don\'t deserve to wear {belt} belt yet')
     else: promote()
   elif ch == ord('i'):
     belts = game['player']['belts']
