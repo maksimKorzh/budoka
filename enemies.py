@@ -22,8 +22,8 @@ def create_enemy(row, col, hp, attack, defense, level, name):
 
 # Promote to the next rank
 def promote():
-  max_level = min(7, game['player']['level']+1)
-  if max_level == 7: return
+  max_level = min(8, game['player']['level']+1)
+  if max_level == 8: return
   new_belt = RANKS[str(max_level)]['belt']
   if new_belt not in game['player']['belts']:
     message(f'You deserve to wear {new_belt} belt but you need to find one')

@@ -63,10 +63,16 @@ def parse_command():
       if required_belt in game['player']['belts']:
         game['level'] -= 1
         if game['level'] == 0:
-          curses.endwin()
+          screen.clear()
           if len(game['player']['belts']) == 7:
-            print(f'You have been accepted by the martial art community as an acknowledged {game["player"]["style"]} sensei. You may now start your own dojo')
-          else: print(f'You have escaped with {", ".join(game["player"]["belts"])} belt(s) and earned {game["player"]["experience"]} experience points')
+            screen.addstr(10, 25, 'You have been accepted by the martial art')
+            screen.addstr(11, 25, f'community as an acknowledged {game["player"]["style"]} sensei')
+            screen.addstr(12, 30, 'You may now start your own dojo')
+          else: 
+            screen.addstr(10, 25, f'You have escaped with {", ".join(game["player"]["belts"])} belt(s)')
+            screen.addstr(11, 27, f'and earned {game["player"]["experience"]} experience points')
+          read_key()
+          curses.endwin()
           sys.exit()
         else: make_level()
       else: message(f'You need to have {required_belt} belt to ascend')
