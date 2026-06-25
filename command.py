@@ -12,10 +12,19 @@ def parse_command():
   elif ch == ord(' '):
     regenerate_hp()
     move_all_enemies()
-  elif ch == ord('w'):
+  elif ch == ord('p'):
     for i in range(50):
+      player_y = game['player']['y']
+      player_x = game['player']['x']
+      for enemy in game['enemies']:
+        if enemy['hp'] == 0: continue
+        player_y = game['player']['y']
+        player_x = game['player']['x']
+        if distance_to(player_y, player_x, enemy['position']['y'], enemy['position']['x']) <= 4:
+          message(f'Enemy approaches while you practicing')
+          return
       regenerate_hp()
-      move_local_enemies()
+      move_all_enemies()
   elif ch == ord(','):
     item = game['dungeon'][game['player']['y']][game['player']['x']]
     if item in list(RANKS.keys()):
@@ -28,7 +37,7 @@ def parse_command():
       message(f'You picked up {belt} belt')
       if game['player']['experience'] < game['player']['level'] ** 2 * 10:
         message(f'You don\'t deserve to wear {belt} belt yet')
-    else: promote()
+      else: promote()
   elif ch == ord('i'):
     belts = game['player']['belts']
     message(f'Belts you have: {", ".join(belts)}')

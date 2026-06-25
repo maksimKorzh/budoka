@@ -14,8 +14,8 @@ Gain experience, escape early
     hjklyubn - move
     HJKLYUBN - run
            , - pick up a belt
-       SPACE - wait for 1 turn
-           w - wait for 50 turns
+       SPACE - skip 1 turn
+           p - practice (skip 50 turns)
            i - list belts
 
 # Description

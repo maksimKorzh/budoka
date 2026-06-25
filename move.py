@@ -173,8 +173,20 @@ def move_towards(py, px, ey, ex, enemy):
       enemy['position']['x'] += mx
       return
 
-# Aggravate monster
+# Distance to enemies
+def enemy_at(distance):
+  for enemy in game['enemies']:
+    if enemy['hp'] == 0: continue
+    player_y = game['player']['y']
+    player_x = game['player']['x']
+    if distance_to(player_y, player_x, enemy['position']['y'], enemy['position']['x']) >= distance:
+      return True
+    else: return False
+
+# Aggravate enemies
 def move_all_enemies():
+  player_y = game['player']['y']
+  player_x = game['player']['x']
   for enemy in game['enemies']:
     if enemy['hp'] == 0: continue
     player_y = game['player']['y']
