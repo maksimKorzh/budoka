@@ -117,7 +117,7 @@ def render_stats():
   defense = game['player']['defense']
   style = game['player']['style']
   rank = RANKS[str(game['player']['level'])]['degree']
-  status = 'deshi' if game['player']['level'] < 8 else 'sensei'
+  status = 'deshi' if game['player']['level'] < 7 else 'sensei'
   exp = game['player']['experience']
   up = game['player']['level'] ** 2 * 10
   screen.addstr(23, 1, f'Level: {level}  HP: {hp}({max_hp})  XP: {exp}/{up}  Attack: {attack}  Defense: {defense} -> {rank} {style} {status}')
