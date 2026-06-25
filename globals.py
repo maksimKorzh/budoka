@@ -161,26 +161,6 @@ def distance_to(py, px, ey, ex):
   dx = ex - px
   return math.sqrt(dx**2 + dy**2)
 
-# Character selection menu
-menu = 'Pick up your style:\n\n'
-menu += ' a) Aikido   (tripple attack, always hit)\n'
-menu += ' j) Judo     (defense +2, always_hit, max damage, HP +5)\n'
-menu += ' k) Karate   (attack +2, max damage)\n'
-menu += ' n) Ninjutsu (attack +1, defense +1, always hit, max damage)\n'
-menu += ' s) Sumo     (attack +2, defense+2, HP +15)\n'
-menu += ' t) Taido    (double attack, always hit, attack +1)\n\n'
-menu += 'Your choice > '
-
-# Pick up your style
-try:
-  game['player']['style'] = ENEMIES[input(menu).upper()]
-  bonuses = BONUSES[game['player']['style']]
-  game['player']['max_hp'] += bonuses['hp']
-  game['player']['hp'] = game['player']['max_hp']
-  game['player']['attack'] += bonuses['attack']
-  game['player']['defense'] += bonuses['defense']
-except: pass
-
 # Curses screen
 screen = curses.initscr()
 screen.nodelay(1)

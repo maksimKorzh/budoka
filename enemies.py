@@ -95,8 +95,10 @@ def enemy_hit(enemy):
       game['player']['hp'] = max(0, game['player']['hp'])
       if not game['player']['hp']:
         message(f'You were defeated by {name}')
+        screen.clear()
+        screen.addstr(11, 25, (f'You need to study {game["player"]["style"].lower()} harder'))
+        read_key()
         curses.endwin()
-        print(f'You need to study {game["player"]["style"].lower()} harder')
         sys.exit()
         break
       message(f'{name}({enemy["hp"]}) hits you by {damage} points')
