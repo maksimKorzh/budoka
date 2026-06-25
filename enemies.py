@@ -40,7 +40,7 @@ def player_hit(enemy):
   style = ENEMIES[enemy['name']]
   rank = RANKS[str(enemy['level'])]['degree']
   hp = enemy['hp']
-  status = 'deshi' if enemy['level'] < 8 else 'sensei'
+  status = 'deshi' if enemy['level'] < 7 else 'sensei'
   name = rank + ' ' + style + ' ' + status
   for i in range(bonuses['multiple_attacks']):
     message(f'You attempt attack {i+1}')
@@ -75,7 +75,7 @@ def enemy_hit(enemy):
   style = ENEMIES[enemy['name']]
   rank = RANKS[str(enemy['level'])]['degree']
   hp = enemy['hp']
-  status = 'deshi' if enemy['level'] < 8 else 'sensei'
+  status = 'deshi' if enemy['level'] < 7 else 'sensei'
   name = rank + ' ' + style + ' ' + status
   for i in range(bonuses['multiple_attacks']):
     message(f'{name} attempts attack {i+1}')
