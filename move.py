@@ -101,13 +101,13 @@ def run(ch):
   
   # Passable objects
   passable = [
-    FLOOR, PASSAGE, DOOR, STAIRS,
+    FLOOR, PASSAGE, DOOR, STAIRS, ELIXIR,
     MAGENTA_BELT, CYAN_BELT, BLUE_BELT, GREEN_BELT, RED_BELT, BLACK_BELT
   ]
   
   # Stoppable objects
   stoppable = [
-    DOOR, STAIRS,
+    DOOR, STAIRS, ELIXIR,
     MAGENTA_BELT, CYAN_BELT, BLUE_BELT, GREEN_BELT, RED_BELT, BLACK_BELT
   ]
   
@@ -130,14 +130,8 @@ def blocked(row, col):
       else: return False
   
   # Blocked by dungeon
-  if game['dungeon'][row][col] in [FLOOR, DOOR, PASSAGE, STAIRS]: return False
+  if game['dungeon'][row][col] in [FLOOR, DOOR, PASSAGE, STAIRS, ELIXIR]: return False
   else: return True
-
-# Get distance between two cells
-def distance_to(py, px, ey, ex):
-  dy = ey - py
-  dx = ex - px
-  return math.sqrt(dx**2 + dy**2)
 
 # Entities chase player
 def move_towards(py, px, ey, ex, enemy):
@@ -172,16 +166,6 @@ def move_towards(py, px, ey, ex, enemy):
       enemy['position']['y'] += my
       enemy['position']['x'] += mx
       return
-
-# Distance to enemies
-def enemy_at(distance):
-  for enemy in game['enemies']:
-    if enemy['hp'] == 0: continue
-    player_y = game['player']['y']
-    player_x = game['player']['x']
-    if distance_to(player_y, player_x, enemy['position']['y'], enemy['position']['x']) >= distance:
-      return True
-    else: return False
 
 # Aggravate enemies
 def move_all_enemies():

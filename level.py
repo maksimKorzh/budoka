@@ -42,6 +42,11 @@ def fill_dungeon():
   if game['level'] < 7:
     game['dungeon'][belt[0]][belt[1]] = str(game['level']+1)
 
+  # Place elixirs of health
+  for i in range(randrange(1, game['level']+1)):
+    elixir = choice(get_tiles([FLOOR]))
+    game['dungeon'][elixir[0]][elixir[1]] = ELIXIR
+  
   # Place player
   tiles = get_tiles([FLOOR])
   player_pos = choice(tiles)

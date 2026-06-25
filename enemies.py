@@ -24,12 +24,12 @@ def create_enemy(row, col, hp, attack, defense, level, name):
 def promote():
   new_belt = RANKS[str(game['player']['level']+1)]['belt']
   if new_belt not in game['player']['belts']:
-    message(f'You deserve to wear {new_belt} belt but you need to find it first')
+    message(f'You deserve to wear {new_belt} belt but you need to find one')
     return
   game['player']['level'] += 1
   game['player']['attack'] += 1
   game['player']['defense'] += 1
-  game['player']['max_hp'] += game['player']['level']
+  game['player']['max_hp'] += game['player']['level'] * 2
   if game['player']['level'] >= 8: game['player']['sensivity'] = True
   message(f'You are now wearing {new_belt} belt')
 
@@ -49,11 +49,11 @@ def player_hit(enemy):
     hit_chance = player_chance + roll_dice(1, 6) >= enemy_chance + roll_dice(1, 6)
     if bonuses['always_hit']:
       hit_chance = 1
-      message('You attack first')
+      message('You never miss')
     if hit_chance:
       damage = roll_dice(1, game['player']['attack'] + game['player']['level']) + roll_dice(1, 6) - enemy['defense']
       if bonuses['max_damage']:
-        damage = game['player']['attack'] + game['player']['level'] + roll_dice(1, 6)- enemy['defense']
+        damage = game['player']['attack'] + game['player']['level'] + 5 - enemy['defense']
         message('You attack with maximum damage')
       damage = max(1, damage)
       enemy['hp'] -= damage
@@ -84,11 +84,11 @@ def enemy_hit(enemy):
     hit_chance = enemy_chance + roll_dice(1, 6) >= player_chance + roll_dice(1, 6)
     if bonuses['always_hit']:
       hit_chance = 1
-      message(f'{name} attacks first')
+      message(f'{name} never misses')
     if hit_chance:
       damage = roll_dice(1, enemy['attack'] + enemy['level']) + roll_dice(1, 6) - game['player']['defense']
       if bonuses['max_damage']:
-        damage = enemy['attack'] + enemy['level'] + roll_dice(1, 6) - game['player']['defense']
+        damage = enemy['attack'] + enemy['level'] + 5 - game['player']['defense']
         message(f'{name} attacks with maximum damage')
       damage = max(1, damage)
       game['player']['hp'] -= damage

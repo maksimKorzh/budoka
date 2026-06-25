@@ -13,6 +13,9 @@ def parse_command():
     regenerate_hp()
     move_all_enemies()
   elif ch == ord('p'):
+    if game['player']['hp'] < game['player']['max_hp']:
+      message(f'You practice {game["player"]["style"]} and start to feel better')
+    else: message(f'You practice {game["player"]["style"]} but it gives no effect')
     for i in range(50):
       player_y = game['player']['y']
       player_x = game['player']['x']
@@ -21,7 +24,7 @@ def parse_command():
         player_y = game['player']['y']
         player_x = game['player']['x']
         if distance_to(player_y, player_x, enemy['position']['y'], enemy['position']['x']) <= 4:
-          message(f'Enemy approaches while you practicing')
+          message(f'Enemy approaches while you practicing {game["player"]["style"]}')
           return
       regenerate_hp()
       move_all_enemies()
@@ -38,6 +41,12 @@ def parse_command():
       if game['player']['experience'] < game['player']['level'] ** 2 * 10:
         message(f'You don\'t deserve to wear {belt} belt yet')
       else: promote()
+    elif item == ELIXIR:
+      if game['player']['hp'] < game['player']['max_hp']:
+        game['player']['hp'] = game['player']['max_hp']
+        message('You drank the elixir of health and fully recovered')
+      else: message('You drank the elixir of health but it gives no effect')
+      game['dungeon'][game['player']['y']][game['player']['x']] = FLOOR
   elif ch == ord('i'):
     belts = game['player']['belts']
     message(f'Belts you have: {", ".join(belts)}')

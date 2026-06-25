@@ -10,6 +10,8 @@ def render_char(row, col, dark_room=False):
     screen.addch(row, col, game['dungeon'][row][col], paint('darkyellow'))
   elif game['dungeon'][row][col] == STAIRS:
     screen.addch(row, col, game['dungeon'][row][col], paint('yellow'))
+  elif game['dungeon'][row][col] == ELIXIR:
+    screen.addch(row, col, game['dungeon'][row][col], paint('green'))
   elif game['dungeon'][row][col] == PASSAGE:
     screen.addch(row, col, game['dungeon'][row][col], paint('darkwhite'))
   elif game['dungeon'][row][col] in [str(i) for i in range(2, 8)]:
@@ -25,15 +27,19 @@ def render_enemies():
     enemy_y = enemy['position']['y']
     enemy_x = enemy['position']['x']
     belt = RANKS[str(enemy['level'])]['belt']
-    if [enemy_y, enemy_x] in game['visited_tiles']:
-      for room in game['rooms']:
-        if game['dungeon'][enemy_y][enemy_x] == FLOOR:
-          if current_room(player_y, player_x, room):
-            if current_room(enemy_y, enemy_x, room):
-              screen.addch(enemy_y, enemy_x, enemy['name'], paint(belt))
-        elif game['dungeon'][enemy_y][enemy_x] in [PASSAGE, DOOR]:
-          if abs(enemy_y-player_y) <= 1 and abs(enemy_x-player_x) <= 1:
-            screen.addch(enemy_y, enemy_x, enemy['name'], paint(belt))
+    for room in game['rooms']:
+      if game['dungeon'][enemy_y][enemy_x] == FLOOR:
+        if current_room(player_y, player_x, room):
+          if current_room(enemy_y, enemy_x, room):
+            if room['light']:
+              if [enemy_y, enemy_x] in game['visited_tiles']:
+                screen.addch(enemy_y, enemy_x, enemy['name'], paint(belt))
+            else:
+              if distance_to(player_y, player_x, enemy['position']['y'], enemy['position']['x']) < 2:
+                screen.addch(enemy_y, enemy_x, enemy['name'], paint(belt))
+      elif game['dungeon'][enemy_y][enemy_x] in [PASSAGE, DOOR]:
+        if distance_to(player_y, player_x, enemy['position']['y'], enemy['position']['x']) <= 1:
+          screen.addch(enemy_y, enemy_x, enemy['name'], paint(belt))
 
 # Render enemies
 def render_all_enemies():

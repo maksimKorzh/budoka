@@ -38,6 +38,7 @@ V_WALL = '|'
 H_WALL = '-'
 STAIRS = '%'
 PLAYER = '@'
+ELIXIR = '!'
 PASSAGE = '#'
 RED_BELT = '6'
 CYAN_BELT = '3'
@@ -128,8 +129,8 @@ game = {
   'player': {
     'y': 0,
     'x': 0,
-    'hp': 20,
-    'max_hp': 20,
+    'hp': 10,
+    'max_hp': 10,
     'attack': 1,
     'defense': 1,
     'level': 1,
@@ -153,6 +154,12 @@ def message(text):
   screen.clrtoeol()
   render_screen()
   read_key()
+
+# Get distance between two cells
+def distance_to(py, px, ey, ex):
+  dy = ey - py
+  dx = ex - px
+  return math.sqrt(dx**2 + dy**2)
 
 # Character selection menu
 menu = 'Pick up your style:\n\n'
