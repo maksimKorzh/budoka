@@ -68,12 +68,12 @@ def parse_command():
         if game['level'] == 0:
           screen.clear()
           if len(game['player']['belts']) == 7:
-            screen.addstr(10, 25, 'You have been accepted by the martial art')
-            screen.addstr(11, 25, f'community as an acknowledged {game["player"]["style"]} sensei')
-            screen.addstr(12, 30, 'You may now start your own dojo')
+            screen.addstr(10, 22, 'You have been accepted by the martial art')
+            screen.addstr(11, 22, f'community as an acknowledged {game["player"]["style"]} sensei')
+            screen.addstr(12, 37, 'You may now start your own dojo')
           else: 
-            screen.addstr(10, 25, f'You have escaped with {", ".join(game["player"]["belts"])} belt(s)')
-            screen.addstr(11, 27, f'and earned {game["player"]["experience"]} experience points')
+            screen.addstr(10, 22, f'You have escaped with {", ".join(game["player"]["belts"])} belt(s)')
+            screen.addstr(11, 24, f'and earned {game["player"]["experience"]} experience points')
           read_key()
           curses.endwin()
           sys.exit()
