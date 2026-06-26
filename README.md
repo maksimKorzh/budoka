@@ -1,48 +1,74 @@
 # Budoka
-A roguelike game dedicated to martial arts
 
-# How to run it?
-    python main.py
+A roguelike game dedicated to martial arts. Fight your way through
+a dungeon, collect belts, and earn your black belt.
 
-# Primary goal
-Collect all belts and escape the dungeon to start your own dojo
+## What it does
 
-# Secondary goal
-Gain experience, escape early
+You play as a martial artist working your way up through six disciplines:
+Aikido, Judo, Karate, Ninjutsu, Sumo, and Taido. Beat enemies to gain
+experience. Grab the right belt to rank up. Get out of the dungeon
+before you get overwhelmed.
 
-# Controls
-    hjklyubn - move
-    HJKLYUBN - run
-           , - pick up a belt
-       SPACE - skip 1 turn
-           p - practice (skip 50 turns)
-           i - list belts
+Once you hit black belt + 1 dan, you unlock "sensitivity" — the ability
+to see every enemy on the map. Turns the game on its head.
 
-# Description
-There are 6 martial art classes:
- - Aikido
- - Judo
- - Karate
- - Ninjutsu
- - Sumo
- - Taido
+## Running it
 
-In order to promote to the next rank you need to gain
-experience by defeating enemies and also pick up a
-corresponding belt
-<br>
-<br>
-Belts also work like keys to ascend to the previous levels,
-sometimes it might be useful to gain experience by fighting
-weaker players on those levels
-<br>
-<br>
-When you reach 1 dan + black belt you'll get a "sensivity" skill,
-meaning you'll be seeing all the enemies on the map.
-There's also a hidden aggravation mechanism - once you hit your
-opponent all enemies start chasing you, once you get hit only
-those enemies located nearby would chase you
-<br>
-<br>
-Skipping turns or wandering in the dungeon would sometimes
-generate new enemies
+No dependencies. Just Python 3.
+
+```
+python main.py
+```
+
+## Controls
+
+| Key | Action |
+|-----|--------|
+| `h` `j` `k` `l` `y` `u` `b` `n` | Move (vi-style) |
+| `H` `J` `K` `L` `Y` `U` `B` `N` | Run |
+| `,` | Pick up a belt |
+| `Space` | Skip one turn |
+| `p` | Practice (skip 50 turns) |
+| `i` | List your belts |
+
+## How it works
+
+**Belts are keys.** Each belt lets you go back up to earlier dungeon
+levels. Sometimes it pays to fight weaker enemies there for extra
+experience before tackling the next rank.
+
+**Enemies have memory.** Hit someone and the whole floor comes after you.
+Get hit and only nearby enemies notice. Skipping turns or wandering
+around will occasionally spawn new opponents — the dungeon doesn't
+wait for you.
+
+**Six martial art classes**, each with their own belt progression
+from white to black.
+
+## Goals
+
+- **Primary:** Collect every belt and escape. You open your own dojo.
+- **Secondary:** Gain experience and get out early. Live to fight
+  another day.
+
+## Project structure
+
+```
+main.py        Entry point
+command.py     Input handling
+dice.py        RNG
+enemies.py     Enemy logic
+globals.py     Shared state
+level.py       Dungeon generation
+move.py        Movement system
+render.py      ASCII display
+room.py        Room logic
+colors.py      Terminal colors
+```
+
+Nothing to install. Nothing to configure. Run it and start hitting things.
+
+---
+
+Found a bug or got an idea? Open an issue. PRs are welcome.
