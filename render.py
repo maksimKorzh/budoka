@@ -28,7 +28,10 @@ def render_enemies():
     enemy_x = enemy['position']['x']
     belt = RANKS[str(enemy['level'])]['belt']
     for room in game['rooms']:
-      if game['dungeon'][enemy_y][enemy_x] == FLOOR:
+      if game['dungeon'][enemy_y][enemy_x] in [
+        FLOOR, DOOR, STAIRS, ELIXIR,
+        MAGENTA_BELT, CYAN_BELT, BLUE_BELT, GREEN_BELT, RED_BELT, BLACK_BELT
+      ]:
         if current_room(player_y, player_x, room):
           if current_room(enemy_y, enemy_x, room):
             if room['light']:

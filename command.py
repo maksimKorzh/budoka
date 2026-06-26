@@ -50,6 +50,9 @@ def parse_command():
   elif ch == ord('i'):
     belts = game['player']['belts']
     message(f'Belts you have: {", ".join(belts)}')
+  elif ch == ord('f'):
+    fight()
+    move_local_enemies()
   elif ch == ord('>'):
     if game['dungeon'][game['player']['y']][game['player']['x']] == STAIRS:
       if game['level'] == max([int(i) for i in list(RANKS.keys())])-1:
