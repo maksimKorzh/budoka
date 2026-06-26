@@ -11,8 +11,9 @@ Collect all belts and escape the dungeon to start your own dojo
 Gain experience, escape early
 
 # Controls
-    hjklyubn - move
+    hjklyubn - move/attack
     HJKLYUBN - run
+           f - fight until someone loses
            , - pick up a belt
        SPACE - skip 1 turn
            p - practice (skip 50 turns)
