@@ -60,7 +60,7 @@ def player_hit(enemy, auto=False):
       damage = max(1, damage)
       enemy['hp'] -= damage
       enemy['hp'] = max(0, enemy['hp'])
-      if not enemy['hp']:
+      if enemy['hp'] == 0:
         enemy['name'] = game['dungeon'][enemy['position']['y']][enemy['position']['x']]
         message(f'You defeated {name}')
         game['player']['experience'] += enemy['attack'] * enemy['level']
@@ -74,6 +74,7 @@ def player_hit(enemy, auto=False):
 
 # Enemy hits player
 def enemy_hit(enemy, auto=False):
+  if not game['player']['hp']: sys.exit()
   bonuses = BONUSES[ENEMIES[enemy['name']]]
   game['player']['chased'] = False
   style = ENEMIES[enemy['name']]
@@ -99,12 +100,12 @@ def enemy_hit(enemy, auto=False):
       game['player']['hp'] = max(0, game['player']['hp'])
       if not game['player']['hp']:
         message(f'You were defeated by {name}')
+        read_key()
         screen.clear()
         screen.addstr(11, 25, (f'You need to study {game["player"]["style"].lower()} harder'))
         read_key()
         curses.endwin()
         sys.exit()
-        break
       if not auto: message(f'{name}({enemy["hp"]}) hits you by {damage} points')
     else:
       if not auto: message(f'{name} missed you')
@@ -132,6 +133,7 @@ def fight():
         player_hit(enemy, True)
         if not enemy['hp']: break
         enemy_hit(enemy, True)
+        if not game['player']['hp']: return
       else:
         message('There is no enemy')
         break
