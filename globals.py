@@ -74,9 +74,9 @@ BONUSES = {
     'multiple_attacks': 1
   },
   'Karate': {
-    'hp': 0,
+    'hp': 5,
     'attack': 2,
-    'defense': 0,
+    'defense': 1,
     'max_damage': True,
     'always_hit': False,
     'multiple_attacks': 1
